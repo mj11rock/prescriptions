@@ -1,5 +1,85 @@
 // Medicine Checker Application
 let medicinesDatabase = [];
+let currentLanguage = 'en';
+
+// Translations
+const translations = {
+    en: {
+        title: "Medicine Checker",
+        subtitle: "Verify medicines from our database",
+        searchPlaceholder: "Enter medicine name...",
+        searchButton: "Search",
+        howToUseTitle: "How to Use:",
+        howToUse1: "Type the medicine name in the search box",
+        howToUse2: 'Click "Search" or press Enter',
+        howToUse3: "View the results and medicine details",
+        totalMedicines: "Total medicines in database:",
+        footer: "Medicine Checker © 2024 | Data updated regularly",
+        medicineFound: "Medicine Found",
+        medicineNotFound: "Medicine Not Found",
+        name: "Name:",
+        genericName: "Generic Name:",
+        category: "Category:",
+        description: "Description:",
+        dosage: "Typical Dosage:",
+        sideEffects: "Common Side Effects:",
+        notFoundMessage: 'The medicine "{0}" was not found in our database.',
+        checkSpelling: "Please check the spelling or try searching with the generic name.",
+        databaseContains: "Our database contains {0} medicines.",
+        enterMedicineName: "Please enter a medicine name to search.",
+        errorLoading: "Could not load medicines database. Please refresh the page."
+    },
+    ru: {
+        title: "Проверка Лекарств",
+        subtitle: "Проверьте лекарства из нашей базы данных",
+        searchPlaceholder: "Введите название лекарства...",
+        searchButton: "Поиск",
+        howToUseTitle: "Как использовать:",
+        howToUse1: "Введите название лекарства в поле поиска",
+        howToUse2: 'Нажмите "Поиск" или клавишу Enter',
+        howToUse3: "Просмотрите результаты и подробную информацию",
+        totalMedicines: "Всего лекарств в базе данных:",
+        footer: "Проверка Лекарств © 2024 | Данные регулярно обновляются",
+        medicineFound: "Лекарство Найдено",
+        medicineNotFound: "Лекарство Не Найдено",
+        name: "Название:",
+        genericName: "Общее название:",
+        category: "Категория:",
+        description: "Описание:",
+        dosage: "Типичная дозировка:",
+        sideEffects: "Общие побочные эффекты:",
+        notFoundMessage: 'Лекарство "{0}" не найдено в нашей базе данных.',
+        checkSpelling: "Пожалуйста, проверьте правописание или попробуйте поиск по общему названию.",
+        databaseContains: "В нашей базе данных содержится {0} лекарств.",
+        enterMedicineName: "Пожалуйста, введите название лекарства для поиска.",
+        errorLoading: "Не удалось загрузить базу данных лекарств. Пожалуйста, обновите страницу."
+    },
+    uz: {
+        title: "Dori Tekshiruvchi",
+        subtitle: "Bazamizdagi dorilarni tekshiring",
+        searchPlaceholder: "Dori nomini kiriting...",
+        searchButton: "Qidirish",
+        howToUseTitle: "Qanday foydalanish:",
+        howToUse1: "Qidiruv maydoniga dori nomini kiriting",
+        howToUse2: '"Qidirish" tugmasini bosing yoki Enter tugmasini bosing',
+        howToUse3: "Natijalar va dori tafsilotlarini ko'ring",
+        totalMedicines: "Ma'lumotlar bazasidagi dorilar soni:",
+        footer: "Dori Tekshiruvchi © 2024 | Ma'lumotlar muntazam yangilanadi",
+        medicineFound: "Dori Topildi",
+        medicineNotFound: "Dori Topilmadi",
+        name: "Nomi:",
+        genericName: "Umumiy nomi:",
+        category: "Kategoriya:",
+        description: "Tavsif:",
+        dosage: "Odatiy dozasi:",
+        sideEffects: "Keng tarqalgan yon ta'sirlar:",
+        notFoundMessage: '"{0}" dori bazamizda topilmadi.',
+        checkSpelling: "Iltimos, imloni tekshiring yoki umumiy nom bilan qidirishga harakat qiling.",
+        databaseContains: "Bizning ma'lumotlar bazamizda {0} ta dori mavjud.",
+        enterMedicineName: "Iltimos, qidirish uchun dori nomini kiriting.",
+        errorLoading: "Dorilar bazasi yuklanmadi. Iltimos, sahifani yangilang."
+    }
+};
 
 // DOM Elements
 const medicineInput = document.getElementById('medicineInput');
@@ -13,6 +93,36 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+// Get translation
+function t(key, ...args) {
+    let text = translations[currentLanguage][key] || translations.en[key] || key;
+    args.forEach((arg, index) => {
+        text = text.replace(`{${index}}`, arg);
+    });
+    return text;
+}
+
+// Update UI language
+function updateLanguage() {
+    document.documentElement.lang = currentLanguage;
+    
+    // Update all elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        element.textContent = t(key);
+    });
+    
+    // Update placeholder
+    const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+    placeholderElements.forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        element.placeholder = t(key);
+    });
+    
+    // Update title
+    document.title = t('title');
 }
 
 // Load medicines data
@@ -29,7 +139,7 @@ async function loadMedicines() {
         console.error('Error loading medicines:', error);
         resultDiv.innerHTML = `
             <div class="error">
-                <strong>Error:</strong> Could not load medicines database. Please refresh the page.
+                <strong>Error:</strong> ${t('errorLoading')}
             </div>
         `;
     }
@@ -40,7 +150,7 @@ function searchMedicine(medicineName) {
     if (!medicineName || medicineName.trim() === '') {
         resultDiv.innerHTML = `
             <div class="result-card">
-                <p>Please enter a medicine name to search.</p>
+                <p>${t('enterMedicineName')}</p>
             </div>
         `;
         return;
@@ -73,13 +183,13 @@ function searchMedicine(medicineName) {
 function displayMedicineFound(medicine) {
     resultDiv.innerHTML = `
         <div class="result-card found">
-            <h3>✓ Medicine Found</h3>
-            <p><strong>Name:</strong> ${escapeHtml(medicine.name)}</p>
-            <p><strong>Generic Name:</strong> ${escapeHtml(medicine.genericName)}</p>
-            <p><strong>Category:</strong> ${escapeHtml(medicine.category)}</p>
-            <p><strong>Description:</strong> ${escapeHtml(medicine.description)}</p>
-            <p><strong>Typical Dosage:</strong> ${escapeHtml(medicine.dosage)}</p>
-            <p><strong>Common Side Effects:</strong> ${escapeHtml(medicine.sideEffects)}</p>
+            <h3>✓ ${t('medicineFound')}</h3>
+            <p><strong>${t('name')}</strong> ${escapeHtml(medicine.name)}</p>
+            <p><strong>${t('genericName')}</strong> ${escapeHtml(medicine.genericName)}</p>
+            <p><strong>${t('category')}</strong> ${escapeHtml(medicine.category)}</p>
+            <p><strong>${t('description')}</strong> ${escapeHtml(medicine.description)}</p>
+            <p><strong>${t('dosage')}</strong> ${escapeHtml(medicine.dosage)}</p>
+            <p><strong>${t('sideEffects')}</strong> ${escapeHtml(medicine.sideEffects)}</p>
         </div>
     `;
 }
@@ -88,10 +198,10 @@ function displayMedicineFound(medicine) {
 function displayMedicineNotFound(searchTerm) {
     resultDiv.innerHTML = `
         <div class="result-card not-found">
-            <h3>✗ Medicine Not Found</h3>
-            <p>The medicine "<strong>${escapeHtml(searchTerm)}</strong>" was not found in our database.</p>
-            <p>Please check the spelling or try searching with the generic name.</p>
-            <p>Our database contains ${medicinesDatabase.length} medicines.</p>
+            <h3>✗ ${t('medicineNotFound')}</h3>
+            <p>${t('notFoundMessage', escapeHtml(searchTerm))}</p>
+            <p>${t('checkSpelling')}</p>
+            <p>${t('databaseContains', medicinesDatabase.length)}</p>
         </div>
     `;
 }
@@ -155,6 +265,34 @@ document.addEventListener('click', (e) => {
         suggestionsDiv.classList.remove('show');
     }
 });
+
+// Language switching
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const lang = e.target.getAttribute('data-lang');
+        currentLanguage = lang;
+        
+        // Update active button
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        
+        // Update UI
+        updateLanguage();
+        
+        // Save preference
+        localStorage.setItem('preferredLanguage', lang);
+    });
+});
+
+// Load saved language preference
+const savedLang = localStorage.getItem('preferredLanguage');
+if (savedLang && translations[savedLang]) {
+    currentLanguage = savedLang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === savedLang);
+    });
+    updateLanguage();
+}
 
 // Initialize app
 loadMedicines();

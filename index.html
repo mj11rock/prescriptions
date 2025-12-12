@@ -9,8 +9,13 @@
 <body>
     <div class="container">
         <header>
-            <h1>💊 Medicine Checker</h1>
-            <p class="subtitle">Verify medicines from our database</p>
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="ru">Русский</button>
+                <button class="lang-btn" data-lang="uz">O'zbek</button>
+            </div>
+            <h1>💊 <span data-i18n="title">Medicine Checker</span></h1>
+            <p class="subtitle" data-i18n="subtitle">Verify medicines from our database</p>
         </header>
 
         <main>
@@ -20,9 +25,10 @@
                         type="text" 
                         id="medicineInput" 
                         placeholder="Enter medicine name..."
+                        data-i18n-placeholder="searchPlaceholder"
                         autocomplete="off"
                     >
-                    <button id="searchBtn">Search</button>
+                    <button id="searchBtn" data-i18n="searchButton">Search</button>
                 </div>
                 <div id="suggestions" class="suggestions"></div>
             </div>
@@ -30,21 +36,21 @@
             <div id="result" class="result"></div>
 
             <div class="info-section">
-                <h3>How to Use:</h3>
+                <h3 data-i18n="howToUseTitle">How to Use:</h3>
                 <ol>
-                    <li>Type the medicine name in the search box</li>
-                    <li>Click "Search" or press Enter</li>
-                    <li>View the results and medicine details</li>
+                    <li data-i18n="howToUse1">Type the medicine name in the search box</li>
+                    <li data-i18n="howToUse2">Click "Search" or press Enter</li>
+                    <li data-i18n="howToUse3">View the results and medicine details</li>
                 </ol>
             </div>
 
             <div class="stats-section">
-                <p>Total medicines in database: <span id="totalMedicines">0</span></p>
+                <p><span data-i18n="totalMedicines">Total medicines in database:</span> <span id="totalMedicines">0</span></p>
             </div>
         </main>
 
         <footer>
-            <p>Medicine Checker &copy; 2024 | Data updated regularly</p>
+            <p><span data-i18n="footer">Medicine Checker &copy; 2024 | Data updated regularly</span></p>
         </footer>
     </div>
 
