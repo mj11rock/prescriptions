@@ -194,7 +194,9 @@ function searchMedicine(searchTerm) {
 
 // Display medicines found
 function displayMedicines(medicines) {
-    const medicinesHtml = medicines.map(medicine => `
+    const medicinesHtml = medicines.map(medicine => {
+        const currency = escapeHtml(medicine.currency || 'UZS');
+        return `
         <div class="result-card found">
             <h3>✓ ${t('medicineFound')}</h3>
             <p><strong>${t('packId')}</strong> ${escapeHtml(medicine.pack_id || 'N/A')}</p>
@@ -203,12 +205,13 @@ function displayMedicines(medicines) {
             <p><strong>${t('manufacturer')}</strong> ${escapeHtml(medicine.manufacturer || 'N/A')}</p>
             <p><strong>${t('packName')}</strong> ${escapeHtml(medicine.pack_name || 'N/A')}</p>
             <p><strong>${t('regNum')}</strong> ${escapeHtml(medicine.reg_num || 'N/A')}</p>
-            <p><strong>${t('currency')}</strong> ${escapeHtml(medicine.currency || 'N/A')}</p>
-            <p><strong>${t('baseManPrice')}</strong> ${escapeHtml(medicine.base_man_price?.toLocaleString() || '0')} ${escapeHtml(medicine.currency || 'UZS')}</p>
-            <p><strong>${t('baseOptPrice')}</strong> ${escapeHtml(medicine.base_opt_price?.toLocaleString() || '0')} ${escapeHtml(medicine.currency || 'UZS')}</p>
-            <p><strong>${t('baseMarketPrice')}</strong> ${escapeHtml(medicine.base_market_price?.toLocaleString() || '0')} ${escapeHtml(medicine.currency || 'UZS')}</p>
+            <p><strong>${t('currency')}</strong> ${currency}</p>
+            <p><strong>${t('baseManPrice')}</strong> ${escapeHtml(medicine.base_man_price?.toLocaleString() || '0')} ${currency}</p>
+            <p><strong>${t('baseOptPrice')}</strong> ${escapeHtml(medicine.base_opt_price?.toLocaleString() || '0')} ${currency}</p>
+            <p><strong>${t('baseMarketPrice')}</strong> ${escapeHtml(medicine.base_market_price?.toLocaleString() || '0')} ${currency}</p>
         </div>
-    `).join('');
+    `;
+    }).join('');
     
     resultDiv.innerHTML = medicinesHtml;
 }
