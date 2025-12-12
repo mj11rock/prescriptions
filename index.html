@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicine Checker</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -21,13 +23,8 @@
         <main>
             <div class="search-section">
                 <div class="search-box">
-                    <input 
-                        type="text" 
-                        id="medicineInput" 
-                        placeholder="Enter medicine name..."
-                        data-i18n-placeholder="searchPlaceholder"
-                        autocomplete="off"
-                    >
+                    <input type="text" id="medicineInput" placeholder="Enter medicine name..."
+                        data-i18n-placeholder="searchPlaceholder" autocomplete="off">
                     <button id="searchBtn" data-i18n="searchButton">Search</button>
                 </div>
                 <div id="suggestions" class="suggestions"></div>
@@ -45,15 +42,18 @@
             </div>
 
             <div class="stats-section">
-                <p><span data-i18n="totalMedicines">Total medicines in database:</span> <span id="totalMedicines">0</span></p>
+                <p><span data-i18n="totalMedicines">Total medicines in database:</span> <span
+                        id="totalMedicines">0</span></p>
             </div>
         </main>
 
         <footer>
-            <p><span data-i18n="footer">Medicine Checker &copy; 2024 | Data updated regularly</span></p>
+            <p><span data-i18n="footer">Data updated regularly</span></p>
+            <p>done by: <a href="https://t.me/islombe_dev">mj11rock</a></p>
         </footer>
     </div>
 
     <script src="app.js"></script>
 </body>
+
 </html>
