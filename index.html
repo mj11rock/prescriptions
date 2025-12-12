@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicine Checker</title>
     <link rel="stylesheet" href="style.css">
+    <!-- SheetJS library for Excel file parsing -->
+    <script src="https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -19,6 +21,18 @@
         </header>
 
         <main>
+            <div class="upload-section">
+                <div class="upload-box">
+                    <label for="fileInput" class="upload-label">
+                        <span class="upload-icon">📁</span>
+                        <span data-i18n="uploadLabel">Upload Excel Database</span>
+                    </label>
+                    <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display: none;">
+                    <span id="fileName" class="file-name"></span>
+                </div>
+                <p class="upload-hint" data-i18n="uploadHint">Upload an Excel file to use as medicine database, or use the default database</p>
+            </div>
+
             <div class="search-section">
                 <div class="search-box">
                     <input 
@@ -46,6 +60,7 @@
 
             <div class="stats-section">
                 <p><span data-i18n="totalMedicines">Total medicines in database:</span> <span id="totalMedicines">0</span></p>
+                <p id="databaseSource" class="database-source"></p>
             </div>
         </main>
 

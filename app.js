@@ -27,7 +27,12 @@ const translations = {
         checkSpelling: "Please check the spelling or try searching with the generic name.",
         databaseContains: "Our database contains {0} medicines.",
         enterMedicineName: "Please enter a medicine name to search.",
-        errorLoading: "Could not load medicines database. Please refresh the page."
+        errorLoading: "Could not load medicines database. Please refresh the page.",
+        uploadLabel: "Upload Excel Database",
+        uploadHint: "Upload an Excel file to use as medicine database, or use the default database",
+        fileUploaded: "File uploaded: {0}",
+        usingDefaultDatabase: "Using default database",
+        errorParsingFile: "Error parsing file. Please make sure it's a valid Excel file with columns: Name, Generic Name, Category, Description, Dosage, Side Effects"
     },
     ru: {
         title: "Проверка Лекарств",
@@ -52,7 +57,12 @@ const translations = {
         checkSpelling: "Пожалуйста, проверьте правописание или попробуйте поиск по общему названию.",
         databaseContains: "В нашей базе данных содержится {0} лекарств.",
         enterMedicineName: "Пожалуйста, введите название лекарства для поиска.",
-        errorLoading: "Не удалось загрузить базу данных лекарств. Пожалуйста, обновите страницу."
+        errorLoading: "Не удалось загрузить базу данных лекарств. Пожалуйста, обновите страницу.",
+        uploadLabel: "Загрузить Excel Базу Данных",
+        uploadHint: "Загрузите файл Excel для использования в качестве базы данных лекарств или используйте базу данных по умолчанию",
+        fileUploaded: "Файл загружен: {0}",
+        usingDefaultDatabase: "Используется база данных по умолчанию",
+        errorParsingFile: "Ошибка разбора файла. Убедитесь, что это правильный файл Excel со столбцами: Название, Общее название, Категория, Описание, Дозировка, Побочные эффекты"
     },
     uz: {
         title: "Dori Tekshiruvchi",
@@ -77,7 +87,12 @@ const translations = {
         checkSpelling: "Iltimos, imloni tekshiring yoki umumiy nom bilan qidirishga harakat qiling.",
         databaseContains: "Bizning ma'lumotlar bazamizda {0} ta dori mavjud.",
         enterMedicineName: "Iltimos, qidirish uchun dori nomini kiriting.",
-        errorLoading: "Dorilar bazasi yuklanmadi. Iltimos, sahifani yangilang."
+        errorLoading: "Dorilar bazasi yuklanmadi. Iltimos, sahifani yangilang.",
+        uploadLabel: "Excel Ma'lumotlar Bazasini Yuklash",
+        uploadHint: "Dorilar ma'lumotlar bazasi sifatida foydalanish uchun Excel faylini yuklang yoki standart ma'lumotlar bazasidan foydalaning",
+        fileUploaded: "Fayl yuklandi: {0}",
+        usingDefaultDatabase: "Standart ma'lumotlar bazasi ishlatilmoqda",
+        errorParsingFile: "Faylni tahlil qilishda xato. Iltimos, bu to'g'ri Excel fayli ekanligiga ishonch hosil qiling. Ustunlar: Nomi, Umumiy nomi, Kategoriya, Tavsif, Doza, Yon ta'sirlar"
     }
 };
 
@@ -87,6 +102,10 @@ const searchBtn = document.getElementById('searchBtn');
 const resultDiv = document.getElementById('result');
 const suggestionsDiv = document.getElementById('suggestions');
 const totalMedicinesSpan = document.getElementById('totalMedicines');
+const fileInput = document.getElementById('fileInput');
+const fileNameSpan = document.getElementById('fileName');
+const databaseSourceP = document.getElementById('databaseSource');
+const uploadLabel = document.querySelector('.upload-label');
 
 // Safely escape HTML to prevent XSS
 function escapeHtml(text) {
@@ -130,7 +149,7 @@ function updateLanguage() {
     }
 }
 
-// Load medicines data
+// Load medicines data from default JSON
 async function loadMedicines() {
     try {
         const response = await fetch('medicines.json');
@@ -139,6 +158,7 @@ async function loadMedicines() {
         }
         medicinesDatabase = await response.json();
         totalMedicinesSpan.textContent = medicinesDatabase.length;
+        databaseSourceP.textContent = t('usingDefaultDatabase');
         console.log('Medicines database loaded:', medicinesDatabase.length, 'medicines');
     } catch (error) {
         console.error('Error loading medicines:', error);
@@ -148,6 +168,73 @@ async function loadMedicines() {
             </div>
         `;
     }
+}
+
+// Parse Excel file and load medicines
+function parseExcelFile(file) {
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        try {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            
+            // Get the first sheet
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            
+            // Convert to JSON
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+            
+            // Map Excel columns to our medicine object structure
+            // Expected columns: Name, Generic Name, Category, Description, Dosage, Side Effects
+            medicinesDatabase = jsonData.map(row => ({
+                name: row['Name'] || row['name'] || '',
+                genericName: row['Generic Name'] || row['generic name'] || row['genericName'] || '',
+                category: row['Category'] || row['category'] || '',
+                description: row['Description'] || row['description'] || '',
+                dosage: row['Dosage'] || row['dosage'] || row['Typical Dosage'] || '',
+                sideEffects: row['Side Effects'] || row['side effects'] || row['sideEffects'] || row['Common Side Effects'] || ''
+            })).filter(med => med.name); // Filter out empty entries
+            
+            // Update UI
+            totalMedicinesSpan.textContent = medicinesDatabase.length;
+            fileNameSpan.textContent = t('fileUploaded', file.name);
+            databaseSourceP.textContent = t('fileUploaded', file.name);
+            
+            // Clear result div
+            resultDiv.innerHTML = `
+                <div class="result-card found">
+                    <h3>✓ ${t('fileUploaded', file.name)}</h3>
+                    <p>${t('databaseContains', medicinesDatabase.length)}</p>
+                </div>
+            `;
+            
+            console.log('Excel file loaded:', medicinesDatabase.length, 'medicines');
+        } catch (error) {
+            console.error('Error parsing Excel file:', error);
+            resultDiv.innerHTML = `
+                <div class="error">
+                    <strong>Error:</strong> ${t('errorParsingFile')}
+                </div>
+            `;
+            // Fallback to default database
+            loadMedicines();
+        }
+    };
+    
+    reader.onerror = function(error) {
+        console.error('Error reading file:', error);
+        resultDiv.innerHTML = `
+            <div class="error">
+                <strong>Error:</strong> ${t('errorParsingFile')}
+            </div>
+        `;
+        // Fallback to default database
+        loadMedicines();
+    };
+    
+    reader.readAsArrayBuffer(file);
 }
 
 // Search medicine in database
@@ -268,6 +355,14 @@ suggestionsDiv.addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
     if (!medicineInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
         suggestionsDiv.classList.remove('show');
+    }
+});
+
+// File upload handling
+fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        parseExcelFile(file);
     }
 });
 
