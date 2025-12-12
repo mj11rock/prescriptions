@@ -8,6 +8,13 @@ const resultDiv = document.getElementById('result');
 const suggestionsDiv = document.getElementById('suggestions');
 const totalMedicinesSpan = document.getElementById('totalMedicines');
 
+// Safely escape HTML to prevent XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 // Load medicines data
 async function loadMedicines() {
     try {
@@ -67,12 +74,12 @@ function displayMedicineFound(medicine) {
     resultDiv.innerHTML = `
         <div class="result-card found">
             <h3>✓ Medicine Found</h3>
-            <p><strong>Name:</strong> ${medicine.name}</p>
-            <p><strong>Generic Name:</strong> ${medicine.genericName}</p>
-            <p><strong>Category:</strong> ${medicine.category}</p>
-            <p><strong>Description:</strong> ${medicine.description}</p>
-            <p><strong>Typical Dosage:</strong> ${medicine.dosage}</p>
-            <p><strong>Common Side Effects:</strong> ${medicine.sideEffects}</p>
+            <p><strong>Name:</strong> ${escapeHtml(medicine.name)}</p>
+            <p><strong>Generic Name:</strong> ${escapeHtml(medicine.genericName)}</p>
+            <p><strong>Category:</strong> ${escapeHtml(medicine.category)}</p>
+            <p><strong>Description:</strong> ${escapeHtml(medicine.description)}</p>
+            <p><strong>Typical Dosage:</strong> ${escapeHtml(medicine.dosage)}</p>
+            <p><strong>Common Side Effects:</strong> ${escapeHtml(medicine.sideEffects)}</p>
         </div>
     `;
 }
@@ -82,7 +89,7 @@ function displayMedicineNotFound(searchTerm) {
     resultDiv.innerHTML = `
         <div class="result-card not-found">
             <h3>✗ Medicine Not Found</h3>
-            <p>The medicine "<strong>${searchTerm}</strong>" was not found in our database.</p>
+            <p>The medicine "<strong>${escapeHtml(searchTerm)}</strong>" was not found in our database.</p>
             <p>Please check the spelling or try searching with the generic name.</p>
             <p>Our database contains ${medicinesDatabase.length} medicines.</p>
         </div>
@@ -106,7 +113,7 @@ function showSuggestions(input) {
 
     if (matches.length > 0) {
         suggestionsDiv.innerHTML = matches.map(med => 
-            `<div class="suggestion-item" data-name="${med.name}">${med.name} (${med.genericName})</div>`
+            `<div class="suggestion-item" data-name="${escapeHtml(med.name)}">${escapeHtml(med.name)} (${escapeHtml(med.genericName)})</div>`
         ).join('');
         suggestionsDiv.classList.add('show');
     } else {

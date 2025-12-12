@@ -88,14 +88,6 @@
         "sideEffects": "Drowsiness, dry mouth"
     },
     {
-        "name": "Ranitidine",
-        "genericName": "Ranitidine",
-        "category": "H2 Blocker",
-        "description": "Reduces stomach acid",
-        "dosage": "150mg twice daily",
-        "sideEffects": "Headache, constipation, diarrhea"
-    },
-    {
         "name": "Ciprofloxacin",
         "genericName": "Ciprofloxacin",
         "category": "Antibiotic",
