@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Checker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="ru">Русский</button>
+                <button class="lang-btn" data-lang="uz">O'zbek</button>
+            </div>
+            <h1>💊 <span data-i18n="title">Medicine Checker</span></h1>
+            <p class="subtitle" data-i18n="subtitle">Verify medicines from our database</p>
+        </header>
+
+        <main>
+            <div class="search-section">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="medicineInput" 
+                        placeholder="Enter medicine name..."
+                        data-i18n-placeholder="searchPlaceholder"
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn" data-i18n="searchButton">Search</button>
+                </div>
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+
+            <div id="result" class="result"></div>
+
+            <div class="info-section">
+                <h3 data-i18n="howToUseTitle">How to Use:</h3>
+                <ol>
+                    <li data-i18n="howToUse1">Type the medicine name in the search box</li>
+                    <li data-i18n="howToUse2">Click "Search" or press Enter</li>
+                    <li data-i18n="howToUse3">View the results and medicine details</li>
+                </ol>
+            </div>
+
+            <div class="stats-section">
+                <p><span data-i18n="totalMedicines">Total medicines in database:</span> <span id="totalMedicines">0</span></p>
+            </div>
+        </main>
+
+        <footer>
+            <p><span data-i18n="footer">Medicine Checker &copy; 2024 | Data updated regularly</span></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
