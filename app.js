@@ -7,95 +7,89 @@ const translations = {
     en: {
         title: "Medicine Checker",
         subtitle: "Verify medicines from our database",
-        searchPlaceholder: "Enter medicine name...",
+        searchPlaceholder: "Search by name, manufacturer, reg. number...",
         searchButton: "Search",
         howToUseTitle: "How to Use:",
-        howToUse1: "Type the medicine name in the search box",
+        howToUse1: "Type the medicine name, manufacturer, or registration number",
         howToUse2: 'Click "Search" or press Enter',
         howToUse3: "View the results and medicine details",
         totalMedicines: "Total medicines in database:",
         footer: "Medicine Checker © 2024 | Data updated regularly",
         medicineFound: "Medicine Found",
         medicineNotFound: "Medicine Not Found",
+        packId: "Pack ID:",
+        mark: "Mark:",
         name: "Name:",
-        genericName: "Generic Name:",
-        category: "Category:",
-        description: "Description:",
-        dosage: "Typical Dosage:",
-        sideEffects: "Common Side Effects:",
-        notFoundMessage: 'The medicine "{0}" was not found in our database.',
-        checkSpelling: "Please check the spelling or try searching with the generic name.",
+        manufacturer: "Manufacturer:",
+        packName: "Pack Name:",
+        regNum: "Registration Number:",
+        currency: "Currency:",
+        baseManPrice: "Manufacturer Price:",
+        baseOptPrice: "Wholesale Price:",
+        baseMarketPrice: "Market Price:",
+        notFoundMessage: 'No medicine found matching "{0}".',
+        checkSpelling: "Please check the spelling or try different keywords.",
         databaseContains: "Our database contains {0} medicines.",
-        enterMedicineName: "Please enter a medicine name to search.",
-        errorLoading: "Could not load medicines database. Please refresh the page.",
-        uploadLabel: "Upload Excel Database",
-        uploadHint: "Upload an Excel file to use as medicine database, or use the default database",
-        fileUploaded: "File uploaded: {0}",
-        usingDefaultDatabase: "Using default database",
-        usingUploadedFile: "Using uploaded file",
-        errorParsingFile: "Error parsing file. Please make sure it's a valid Excel file with columns: Name, Generic Name, Category, Description, Dosage, Side Effects"
+        enterMedicineName: "Please enter search keywords.",
+        errorLoading: "Could not load medicines database. Please refresh the page."
     },
     ru: {
         title: "Проверка Лекарств",
         subtitle: "Проверьте лекарства из нашей базы данных",
-        searchPlaceholder: "Введите название лекарства...",
+        searchPlaceholder: "Поиск по названию, производителю, рег. номеру...",
         searchButton: "Поиск",
         howToUseTitle: "Как использовать:",
-        howToUse1: "Введите название лекарства в поле поиска",
+        howToUse1: "Введите название лекарства, производителя или регистрационный номер",
         howToUse2: 'Нажмите "Поиск" или клавишу Enter',
         howToUse3: "Просмотрите результаты и подробную информацию",
         totalMedicines: "Всего лекарств в базе данных:",
         footer: "Проверка Лекарств © 2024 | Данные регулярно обновляются",
         medicineFound: "Лекарство Найдено",
         medicineNotFound: "Лекарство Не Найдено",
+        packId: "ID упаковки:",
+        mark: "Марка:",
         name: "Название:",
-        genericName: "Общее название:",
-        category: "Категория:",
-        description: "Описание:",
-        dosage: "Типичная дозировка:",
-        sideEffects: "Общие побочные эффекты:",
-        notFoundMessage: 'Лекарство "{0}" не найдено в нашей базе данных.',
-        checkSpelling: "Пожалуйста, проверьте правописание или попробуйте поиск по общему названию.",
+        manufacturer: "Производитель:",
+        packName: "Название упаковки:",
+        regNum: "Регистрационный номер:",
+        currency: "Валюта:",
+        baseManPrice: "Цена производителя:",
+        baseOptPrice: "Оптовая цена:",
+        baseMarketPrice: "Рыночная цена:",
+        notFoundMessage: 'Не найдено лекарство по запросу "{0}".',
+        checkSpelling: "Пожалуйста, проверьте правописание или попробуйте другие ключевые слова.",
         databaseContains: "В нашей базе данных содержится {0} лекарств.",
-        enterMedicineName: "Пожалуйста, введите название лекарства для поиска.",
-        errorLoading: "Не удалось загрузить базу данных лекарств. Пожалуйста, обновите страницу.",
-        uploadLabel: "Загрузить Excel Базу Данных",
-        uploadHint: "Загрузите файл Excel для использования в качестве базы данных лекарств или используйте базу данных по умолчанию",
-        fileUploaded: "Файл загружен: {0}",
-        usingDefaultDatabase: "Используется база данных по умолчанию",
-        usingUploadedFile: "Используется загруженный файл",
-        errorParsingFile: "Ошибка разбора файла. Убедитесь, что это правильный файл Excel со столбцами: Название, Общее название, Категория, Описание, Дозировка, Побочные эффекты"
+        enterMedicineName: "Пожалуйста, введите ключевые слова для поиска.",
+        errorLoading: "Не удалось загрузить базу данных лекарств. Пожалуйста, обновите страницу."
     },
     uz: {
         title: "Dori Tekshiruvchi",
         subtitle: "Bazamizdagi dorilarni tekshiring",
-        searchPlaceholder: "Dori nomini kiriting...",
+        searchPlaceholder: "Nomi, ishlab chiqaruvchi, reg. raqami bo'yicha qidirish...",
         searchButton: "Qidirish",
         howToUseTitle: "Qanday foydalanish:",
-        howToUse1: "Qidiruv maydoniga dori nomini kiriting",
+        howToUse1: "Dori nomi, ishlab chiqaruvchi yoki ro'yxatga olish raqamini kiriting",
         howToUse2: '"Qidirish" tugmasini bosing yoki Enter tugmasini bosing',
         howToUse3: "Natijalar va dori tafsilotlarini ko'ring",
         totalMedicines: "Ma'lumotlar bazasidagi dorilar soni:",
         footer: "Dori Tekshiruvchi © 2024 | Ma'lumotlar muntazam yangilanadi",
         medicineFound: "Dori Topildi",
         medicineNotFound: "Dori Topilmadi",
+        packId: "Qadoq ID:",
+        mark: "Belgi:",
         name: "Nomi:",
-        genericName: "Umumiy nomi:",
-        category: "Kategoriya:",
-        description: "Tavsif:",
-        dosage: "Odatiy dozasi:",
-        sideEffects: "Keng tarqalgan yon ta'sirlar:",
-        notFoundMessage: '"{0}" dori bazamizda topilmadi.',
-        checkSpelling: "Iltimos, imloni tekshiring yoki umumiy nom bilan qidirishga harakat qiling.",
+        manufacturer: "Ishlab chiqaruvchi:",
+        packName: "Qadoq nomi:",
+        regNum: "Ro'yxatga olish raqami:",
+        currency: "Valyuta:",
+        baseManPrice: "Ishlab chiqaruvchi narxi:",
+        baseOptPrice: "Ulgurji narxi:",
+        baseMarketPrice: "Bozor narxi:",
+        notFoundMessage: '"{0}" so\'rovi bo\'yicha dori topilmadi.',
+        checkSpelling: "Iltimos, imloni tekshiring yoki boshqa kalit so'zlarni sinab ko'ring.",
         databaseContains: "Bizning ma'lumotlar bazamizda {0} ta dori mavjud.",
-        enterMedicineName: "Iltimos, qidirish uchun dori nomini kiriting.",
-        errorLoading: "Dorilar bazasi yuklanmadi. Iltimos, sahifani yangilang.",
-        uploadLabel: "Excel Ma'lumotlar Bazasini Yuklash",
-        uploadHint: "Dorilar ma'lumotlar bazasi sifatida foydalanish uchun Excel faylini yuklang yoki standart ma'lumotlar bazasidan foydalaning",
-        fileUploaded: "Fayl yuklandi: {0}",
-        usingDefaultDatabase: "Standart ma'lumotlar bazasi ishlatilmoqda",
-        usingUploadedFile: "Yuklangan fayl ishlatilmoqda",
-        errorParsingFile: "Faylni tahlil qilishda xato. Iltimos, bu to'g'ri Excel fayli ekanligiga ishonch hosil qiling. Ustunlar: Nomi, Umumiy nomi, Kategoriya, Tavsif, Doza, Yon ta'sirlar"
+        enterMedicineName: "Iltimos, qidirish uchun kalit so'zlarni kiriting.",
+        errorLoading: "Dorilar bazasi yuklanmadi. Iltimos, sahifani yangilang."
     }
 };
 
@@ -105,10 +99,6 @@ const searchBtn = document.getElementById('searchBtn');
 const resultDiv = document.getElementById('result');
 const suggestionsDiv = document.getElementById('suggestions');
 const totalMedicinesSpan = document.getElementById('totalMedicines');
-const fileInput = document.getElementById('fileInput');
-const fileNameSpan = document.getElementById('fileName');
-const databaseSourceP = document.getElementById('databaseSource');
-const uploadLabel = document.querySelector('.upload-label');
 
 // Safely escape HTML to prevent XSS
 function escapeHtml(text) {
@@ -152,7 +142,7 @@ function updateLanguage() {
     }
 }
 
-// Load medicines data from default JSON
+// Load medicines data from JSON
 async function loadMedicines() {
     try {
         const response = await fetch('medicines.json');
@@ -161,7 +151,6 @@ async function loadMedicines() {
         }
         medicinesDatabase = await response.json();
         totalMedicinesSpan.textContent = medicinesDatabase.length;
-        databaseSourceP.textContent = t('usingDefaultDatabase');
         console.log('Medicines database loaded:', medicinesDatabase.length, 'medicines');
     } catch (error) {
         console.error('Error loading medicines:', error);
@@ -173,86 +162,9 @@ async function loadMedicines() {
     }
 }
 
-// Parse Excel file and load medicines
-function parseExcelFile(file) {
-    const reader = new FileReader();
-    
-    reader.onload = function(e) {
-        try {
-            const data = new Uint8Array(e.target.result);
-            const workbook = XLSX.read(data, { type: 'array' });
-            
-            // Get the first sheet
-            const firstSheetName = workbook.SheetNames[0];
-            const worksheet = workbook.Sheets[firstSheetName];
-            
-            // Convert to JSON
-            const jsonData = XLSX.utils.sheet_to_json(worksheet);
-            
-            // Check if worksheet is empty
-            if (!jsonData || jsonData.length === 0) {
-                throw new Error('Excel file is empty or has no data rows');
-            }
-            
-            // Map Excel columns to our medicine object structure
-            // Expected columns: Name, Generic Name, Category, Description, Dosage, Side Effects
-            medicinesDatabase = jsonData.map(row => ({
-                name: row['Name'] || row['name'] || '',
-                genericName: row['Generic Name'] || row['generic name'] || row['genericName'] || '',
-                category: row['Category'] || row['category'] || '',
-                description: row['Description'] || row['description'] || '',
-                dosage: row['Dosage'] || row['dosage'] || row['Typical Dosage'] || '',
-                sideEffects: row['Side Effects'] || row['side effects'] || row['sideEffects'] || row['Common Side Effects'] || ''
-            })).filter(med => med.name && med.name.trim()); // Filter out empty entries
-            
-            // Check if any valid entries were found
-            if (medicinesDatabase.length === 0) {
-                throw new Error('No valid medicine entries found in the Excel file');
-            }
-            
-            // Update UI
-            totalMedicinesSpan.textContent = medicinesDatabase.length;
-            fileNameSpan.textContent = t('fileUploaded', file.name);
-            databaseSourceP.textContent = `${t('usingUploadedFile')}: ${file.name}`;
-            
-            // Clear result div
-            resultDiv.innerHTML = `
-                <div class="result-card found">
-                    <h3>✓ ${t('fileUploaded', file.name)}</h3>
-                    <p>${t('databaseContains', medicinesDatabase.length)}</p>
-                </div>
-            `;
-            
-            console.log('Excel file loaded:', medicinesDatabase.length, 'medicines');
-        } catch (error) {
-            console.error('Error parsing Excel file:', error);
-            resultDiv.innerHTML = `
-                <div class="error">
-                    <strong>Error:</strong> ${t('errorParsingFile')}
-                </div>
-            `;
-            // Fallback to default database
-            loadMedicines();
-        }
-    };
-    
-    reader.onerror = function(error) {
-        console.error('Error reading file:', error);
-        resultDiv.innerHTML = `
-            <div class="error">
-                <strong>Error:</strong> ${t('errorParsingFile')}
-            </div>
-        `;
-        // Fallback to default database
-        loadMedicines();
-    };
-    
-    reader.readAsArrayBuffer(file);
-}
-
 // Search medicine in database
-function searchMedicine(medicineName) {
-    if (!medicineName || medicineName.trim() === '') {
+function searchMedicine(searchTerm) {
+    if (!searchTerm || searchTerm.trim() === '') {
         resultDiv.innerHTML = `
             <div class="result-card">
                 <p>${t('enterMedicineName')}</p>
@@ -261,42 +173,44 @@ function searchMedicine(medicineName) {
         return;
     }
 
-    const searchTerm = medicineName.trim().toLowerCase();
+    const term = searchTerm.trim().toLowerCase();
     
-    // Exact match first
-    let medicine = medicinesDatabase.find(med => 
-        med.name.toLowerCase() === searchTerm || 
-        med.genericName.toLowerCase() === searchTerm
+    // Search across all relevant fields
+    const matches = medicinesDatabase.filter(med => 
+        (med.pack_id && med.pack_id.toLowerCase().includes(term)) ||
+        (med.mark && med.mark.toLowerCase().includes(term)) ||
+        (med.name && med.name.toLowerCase().includes(term)) ||
+        (med.manufacturer && med.manufacturer.toLowerCase().includes(term)) ||
+        (med.pack_name && med.pack_name.toLowerCase().includes(term)) ||
+        (med.reg_num && med.reg_num.toLowerCase().includes(term))
     );
 
-    // If no exact match, try partial match
-    if (!medicine) {
-        medicine = medicinesDatabase.find(med => 
-            med.name.toLowerCase().includes(searchTerm) || 
-            med.genericName.toLowerCase().includes(searchTerm)
-        );
-    }
-
-    if (medicine) {
-        displayMedicineFound(medicine);
+    if (matches.length > 0) {
+        displayMedicines(matches);
     } else {
         displayMedicineNotFound(searchTerm);
     }
 }
 
-// Display medicine found
-function displayMedicineFound(medicine) {
-    resultDiv.innerHTML = `
+// Display medicines found
+function displayMedicines(medicines) {
+    const medicinesHtml = medicines.map(medicine => `
         <div class="result-card found">
             <h3>✓ ${t('medicineFound')}</h3>
-            <p><strong>${t('name')}</strong> ${escapeHtml(medicine.name)}</p>
-            <p><strong>${t('genericName')}</strong> ${escapeHtml(medicine.genericName)}</p>
-            <p><strong>${t('category')}</strong> ${escapeHtml(medicine.category)}</p>
-            <p><strong>${t('description')}</strong> ${escapeHtml(medicine.description)}</p>
-            <p><strong>${t('dosage')}</strong> ${escapeHtml(medicine.dosage)}</p>
-            <p><strong>${t('sideEffects')}</strong> ${escapeHtml(medicine.sideEffects)}</p>
+            <p><strong>${t('packId')}</strong> ${escapeHtml(medicine.pack_id || 'N/A')}</p>
+            <p><strong>${t('mark')}</strong> ${escapeHtml(medicine.mark || 'N/A')}</p>
+            <p><strong>${t('name')}</strong> ${escapeHtml(medicine.name || 'N/A')}</p>
+            <p><strong>${t('manufacturer')}</strong> ${escapeHtml(medicine.manufacturer || 'N/A')}</p>
+            <p><strong>${t('packName')}</strong> ${escapeHtml(medicine.pack_name || 'N/A')}</p>
+            <p><strong>${t('regNum')}</strong> ${escapeHtml(medicine.reg_num || 'N/A')}</p>
+            <p><strong>${t('currency')}</strong> ${escapeHtml(medicine.currency || 'N/A')}</p>
+            <p><strong>${t('baseManPrice')}</strong> ${escapeHtml(medicine.base_man_price?.toLocaleString() || '0')} ${escapeHtml(medicine.currency || 'UZS')}</p>
+            <p><strong>${t('baseOptPrice')}</strong> ${escapeHtml(medicine.base_opt_price?.toLocaleString() || '0')} ${escapeHtml(medicine.currency || 'UZS')}</p>
+            <p><strong>${t('baseMarketPrice')}</strong> ${escapeHtml(medicine.base_market_price?.toLocaleString() || '0')} ${escapeHtml(medicine.currency || 'UZS')}</p>
         </div>
-    `;
+    `).join('');
+    
+    resultDiv.innerHTML = medicinesHtml;
 }
 
 // Display medicine not found
@@ -322,13 +236,14 @@ function showSuggestions(input) {
     }
 
     const matches = medicinesDatabase.filter(med => 
-        med.name.toLowerCase().includes(searchTerm) || 
-        med.genericName.toLowerCase().includes(searchTerm)
+        (med.name && med.name.toLowerCase().includes(searchTerm)) ||
+        (med.pack_name && med.pack_name.toLowerCase().includes(searchTerm)) ||
+        (med.manufacturer && med.manufacturer.toLowerCase().includes(searchTerm))
     ).slice(0, 5); // Limit to 5 suggestions
 
     if (matches.length > 0) {
         suggestionsDiv.innerHTML = matches.map(med => 
-            `<div class="suggestion-item" data-name="${escapeHtml(med.name)}">${escapeHtml(med.name)} (${escapeHtml(med.genericName)})</div>`
+            `<div class="suggestion-item" data-name="${escapeHtml(med.name || '')}">${escapeHtml(med.name || '')} - ${escapeHtml(med.manufacturer || '')}</div>`
         ).join('');
         suggestionsDiv.classList.add('show');
     } else {
@@ -368,14 +283,6 @@ suggestionsDiv.addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
     if (!medicineInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
         suggestionsDiv.classList.remove('show');
-    }
-});
-
-// File upload handling
-fileInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        parseExcelFile(file);
     }
 });
 
