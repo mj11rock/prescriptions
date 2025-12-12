@@ -19,9 +19,20 @@ A simple, user-friendly web application that allows users to search and verify m
 
 Visit the live application: [https://mj11rock.github.io/prescriptions/](https://mj11rock.github.io/prescriptions/)
 
+### Enabling GitHub Pages
+
+To enable GitHub Pages for this repository:
+1. Go to your repository settings on GitHub
+2. Navigate to "Pages" in the left sidebar
+3. Under "Source", select the branch you want to deploy (e.g., `main` or `copilot/create-medicine-checker-app`)
+4. Select the root folder `/` as the source
+5. Click "Save"
+6. Wait a few minutes for GitHub to build and deploy your site
+7. The site will be available at `https://[username].github.io/prescriptions/`
+
 ## 📋 Database
 
-The application includes a database of 20 common medicines covering various categories:
+The application includes a database of 19 common medicines covering various categories:
 - Analgesics (Pain relievers)
 - Antibiotics
 - Anti-inflammatory drugs
