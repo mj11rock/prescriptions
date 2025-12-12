@@ -32,6 +32,7 @@ const translations = {
         uploadHint: "Upload an Excel file to use as medicine database, or use the default database",
         fileUploaded: "File uploaded: {0}",
         usingDefaultDatabase: "Using default database",
+        usingUploadedFile: "Using uploaded file",
         errorParsingFile: "Error parsing file. Please make sure it's a valid Excel file with columns: Name, Generic Name, Category, Description, Dosage, Side Effects"
     },
     ru: {
@@ -62,6 +63,7 @@ const translations = {
         uploadHint: "Загрузите файл Excel для использования в качестве базы данных лекарств или используйте базу данных по умолчанию",
         fileUploaded: "Файл загружен: {0}",
         usingDefaultDatabase: "Используется база данных по умолчанию",
+        usingUploadedFile: "Используется загруженный файл",
         errorParsingFile: "Ошибка разбора файла. Убедитесь, что это правильный файл Excel со столбцами: Название, Общее название, Категория, Описание, Дозировка, Побочные эффекты"
     },
     uz: {
@@ -92,6 +94,7 @@ const translations = {
         uploadHint: "Dorilar ma'lumotlar bazasi sifatida foydalanish uchun Excel faylini yuklang yoki standart ma'lumotlar bazasidan foydalaning",
         fileUploaded: "Fayl yuklandi: {0}",
         usingDefaultDatabase: "Standart ma'lumotlar bazasi ishlatilmoqda",
+        usingUploadedFile: "Yuklangan fayl ishlatilmoqda",
         errorParsingFile: "Faylni tahlil qilishda xato. Iltimos, bu to'g'ri Excel fayli ekanligiga ishonch hosil qiling. Ustunlar: Nomi, Umumiy nomi, Kategoriya, Tavsif, Doza, Yon ta'sirlar"
     }
 };
@@ -186,6 +189,11 @@ function parseExcelFile(file) {
             // Convert to JSON
             const jsonData = XLSX.utils.sheet_to_json(worksheet);
             
+            // Check if worksheet is empty
+            if (!jsonData || jsonData.length === 0) {
+                throw new Error('Excel file is empty or has no data rows');
+            }
+            
             // Map Excel columns to our medicine object structure
             // Expected columns: Name, Generic Name, Category, Description, Dosage, Side Effects
             medicinesDatabase = jsonData.map(row => ({
@@ -195,12 +203,17 @@ function parseExcelFile(file) {
                 description: row['Description'] || row['description'] || '',
                 dosage: row['Dosage'] || row['dosage'] || row['Typical Dosage'] || '',
                 sideEffects: row['Side Effects'] || row['side effects'] || row['sideEffects'] || row['Common Side Effects'] || ''
-            })).filter(med => med.name); // Filter out empty entries
+            })).filter(med => med.name && med.name.trim()); // Filter out empty entries
+            
+            // Check if any valid entries were found
+            if (medicinesDatabase.length === 0) {
+                throw new Error('No valid medicine entries found in the Excel file');
+            }
             
             // Update UI
             totalMedicinesSpan.textContent = medicinesDatabase.length;
             fileNameSpan.textContent = t('fileUploaded', file.name);
-            databaseSourceP.textContent = t('fileUploaded', file.name);
+            databaseSourceP.textContent = `${t('usingUploadedFile')}: ${file.name}`;
             
             // Clear result div
             resultDiv.innerHTML = `
