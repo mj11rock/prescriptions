@@ -1,5 +1,6 @@
 // Medicine Checker Application
 let medicinesDatabase = [];
+let allowedMedicines = {};
 let currentLanguage = "en";
 
 // Translations
@@ -32,6 +33,15 @@ const translations = {
     databaseContains: "Our database contains {0} medicines.",
     enterMedicineName: "Please enter search keywords.",
     errorLoading: "Could not load medicines database. Please refresh the page.",
+    expiration: "Certificate Expiration:",
+    markName: "Trade Name:",
+    type: "Dosage Form:",
+    owner: "Certificate Holder:",
+    groupName: "Pharmacotherapeutic Group:",
+    howToUse: "Route of Administration:",
+    atxCode: "ATC Code:",
+    atxName: "ATC Name:",
+    condition: "Dispensing Condition:",
   },
   ru: {
     title: "Проверка Лекарств",
@@ -64,6 +74,15 @@ const translations = {
     enterMedicineName: "Пожалуйста, введите ключевые слова для поиска.",
     errorLoading:
       "Не удалось загрузить базу данных лекарств. Пожалуйста, обновите страницу.",
+    expiration: "Срок действия сертификата:",
+    markName: "Торговое название:",
+    type: "Лекарственная форма:",
+    owner: "Владелец сертификата:",
+    groupName: "Фармакотерапевтическая группа:",
+    howToUse: "Способ введения:",
+    atxCode: "АТХ код:",
+    atxName: "АТХ наименование:",
+    condition: "Условия отпуска:",
   },
   uz: {
     title: "Dori Tekshiruvchi",
@@ -96,6 +115,15 @@ const translations = {
     databaseContains: "Bizning ma'lumotlar bazamizda {0} ta dori mavjud.",
     enterMedicineName: "Iltimos, qidirish uchun kalit so'zlarni kiriting.",
     errorLoading: "Dorilar bazasi yuklanmadi. Iltimos, sahifani yangilang.",
+    expiration: "Guvohnoma amal qilish muddati:",
+    markName: "Dori vositasining savdo nomi:",
+    type: "Dori shakli:",
+    owner: "Guvohnoma egasi:",
+    groupName: "Farmakoterapevtik guruh nomi:",
+    howToUse: "Yuborish usuli:",
+    atxCode: "ATX - kod:",
+    atxName: "ATX-nomi:",
+    condition: "Dorixonada berish tartibi:",
   },
 };
 
@@ -190,12 +218,24 @@ function parseCSV(csvText) {
 // Load medicines data from CSV
 async function loadMedicines() {
   try {
-    const response = await fetch("medicines.csv");
-    if (!response.ok) {
+    // Load both databases in parallel
+    const medicinesResponse = await fetch("medicines.csv");
+
+    if (!medicinesResponse.ok) {
       throw new Error("Failed to load medicines database");
     }
-    const csvText = await response.text();
+
+    const csvText = await medicinesResponse.text();
     medicinesDatabase = parseCSV(csvText);
+
+    // Update condition field based on allowed medicines
+    medicinesDatabase.forEach((medicine) => {
+      if (medicine.reg_num && allowedMedicines[medicine.reg_num]) {
+        medicine.condition =
+          allowedMedicines[medicine.reg_num].condition || medicine.condition;
+      }
+    });
+
     totalMedicinesSpan.textContent = medicinesDatabase.length;
     console.log(
       "Medicines database loaded:",
@@ -237,7 +277,35 @@ function searchMedicine(searchTerm) {
   );
 
   if (matches.length > 0) {
-    displayMedicines(matches);
+    // Sort matches: "Без рецепта" first, then "По рецепту", then others
+    const sortedMatches = matches.sort((a, b) => {
+      const conditionA = a.condition || "";
+      const conditionB = b.condition || "";
+
+      if (conditionA === "Без рецепта" && conditionB !== "Без рецепта") {
+        return -1;
+      }
+      if (conditionA !== "Без рецепта" && conditionB === "Без рецепта") {
+        return 1;
+      }
+      if (
+        conditionA === "По рецепту" &&
+        conditionB !== "По рецепту" &&
+        conditionB !== "Без рецепта"
+      ) {
+        return -1;
+      }
+      if (
+        conditionA !== "По рецепту" &&
+        conditionA !== "Без рецепта" &&
+        conditionB === "По рецепту"
+      ) {
+        return 1;
+      }
+      return 0;
+    });
+
+    displayMedicines(sortedMatches);
   } else {
     displayMedicineNotFound(searchTerm);
   }
@@ -248,8 +316,18 @@ function displayMedicines(medicines) {
   const medicinesHtml = medicines
     .map((medicine) => {
       const currency = escapeHtml(medicine.currency || "UZS");
+      const condition = medicine.condition || "";
+
+      // Determine border class based on condition
+      let borderClass = "";
+      if (condition === "По рецепту") {
+        borderClass = "prescription-required";
+      } else if (condition === "Без рецепта") {
+        borderClass = "no-prescription";
+      }
+
       return `
-        <div class="result-card found">
+        <div class="result-card found ${borderClass}">
             <h3>✓ ${t("medicineFound")}</h3>
             <p><strong>${t("packId")}</strong> ${escapeHtml(
         medicine.pack_id || "N/A"
@@ -279,6 +357,13 @@ function displayMedicines(medicines) {
             <p><strong>${t("baseMarketPrice")}</strong> ${escapeHtml(
         (medicine.base_market_price || 0).toLocaleString()
       )} ${currency}</p>
+            ${
+              condition
+                ? `<p><strong>Condition:</strong> <span class="condition-badge ${borderClass}">${escapeHtml(
+                    condition
+                  )}</span></p>`
+                : ""
+            }
         </div>
     `;
     })

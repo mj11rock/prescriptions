@@ -288,3 +288,35 @@ footer {
     padding: 20px 15px;
   }
 }
+
+/* Prescription status styles */
+.result-card.prescription-required {
+  border: 3px solid #dc3545;
+  border-left-width: 5px;
+}
+
+.result-card.no-prescription {
+  border: 3px solid #28a745;
+  border-left-width: 5px;
+}
+
+.condition-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.condition-badge.prescription-required {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #dc3545;
+}
+
+.condition-badge.no-prescription {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #28a745;
+}
