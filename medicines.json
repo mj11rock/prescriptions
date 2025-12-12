@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Paracetamol",
+        "genericName": "Acetaminophen",
+        "category": "Analgesic",
+        "description": "Pain reliever and fever reducer",
+        "dosage": "500mg-1000mg every 4-6 hours",
+        "sideEffects": "Rare: nausea, rash"
+    },
+    {
+        "name": "Ibuprofen",
+        "genericName": "Ibuprofen",
+        "category": "NSAID",
+        "description": "Non-steroidal anti-inflammatory drug",
+        "dosage": "200mg-400mg every 4-6 hours",
+        "sideEffects": "Stomach upset, dizziness"
+    },
+    {
+        "name": "Aspirin",
+        "genericName": "Acetylsalicylic Acid",
+        "category": "NSAID",
+        "description": "Pain reliever, fever reducer, anti-inflammatory",
+        "dosage": "300mg-900mg every 4-6 hours",
+        "sideEffects": "Stomach irritation, increased bleeding risk"
+    },
+    {
+        "name": "Amoxicillin",
+        "genericName": "Amoxicillin",
+        "category": "Antibiotic",
+        "description": "Penicillin-type antibiotic",
+        "dosage": "250mg-500mg three times daily",
+        "sideEffects": "Diarrhea, nausea, rash"
+    },
+    {
+        "name": "Omeprazole",
+        "genericName": "Omeprazole",
+        "category": "Proton Pump Inhibitor",
+        "description": "Reduces stomach acid production",
+        "dosage": "20mg-40mg once daily",
+        "sideEffects": "Headache, stomach pain, diarrhea"
+    },
+    {
+        "name": "Metformin",
+        "genericName": "Metformin",
+        "category": "Antidiabetic",
+        "description": "Type 2 diabetes medication",
+        "dosage": "500mg-2000mg daily with meals",
+        "sideEffects": "Nausea, diarrhea, stomach upset"
+    },
+    {
+        "name": "Lisinopril",
+        "genericName": "Lisinopril",
+        "category": "ACE Inhibitor",
+        "description": "Blood pressure medication",
+        "dosage": "10mg-40mg once daily",
+        "sideEffects": "Dizziness, headache, dry cough"
+    },
+    {
+        "name": "Atorvastatin",
+        "genericName": "Atorvastatin",
+        "category": "Statin",
+        "description": "Cholesterol-lowering medication",
+        "dosage": "10mg-80mg once daily",
+        "sideEffects": "Muscle pain, weakness, headache"
+    },
+    {
+        "name": "Levothyroxine",
+        "genericName": "Levothyroxine",
+        "category": "Thyroid Hormone",
+        "description": "Treats hypothyroidism",
+        "dosage": "25mcg-200mcg once daily",
+        "sideEffects": "Headache, insomnia, nervousness"
+    },
+    {
+        "name": "Albuterol",
+        "genericName": "Salbutamol",
+        "category": "Bronchodilator",
+        "description": "Asthma relief inhaler",
+        "dosage": "2 puffs every 4-6 hours as needed",
+        "sideEffects": "Tremor, nervousness, headache"
+    },
+    {
+        "name": "Cetirizine",
+        "genericName": "Cetirizine",
+        "category": "Antihistamine",
+        "description": "Allergy relief",
+        "dosage": "10mg once daily",
+        "sideEffects": "Drowsiness, dry mouth"
+    },
+    {
+        "name": "Ranitidine",
+        "genericName": "Ranitidine",
+        "category": "H2 Blocker",
+        "description": "Reduces stomach acid",
+        "dosage": "150mg twice daily",
+        "sideEffects": "Headache, constipation, diarrhea"
+    },
+    {
+        "name": "Ciprofloxacin",
+        "genericName": "Ciprofloxacin",
+        "category": "Antibiotic",
+        "description": "Fluoroquinolone antibiotic",
+        "dosage": "250mg-750mg twice daily",
+        "sideEffects": "Nausea, diarrhea, dizziness"
+    },
+    {
+        "name": "Azithromycin",
+        "genericName": "Azithromycin",
+        "category": "Antibiotic",
+        "description": "Macrolide antibiotic",
+        "dosage": "500mg on day 1, then 250mg daily",
+        "sideEffects": "Diarrhea, nausea, stomach pain"
+    },
+    {
+        "name": "Prednisone",
+        "genericName": "Prednisone",
+        "category": "Corticosteroid",
+        "description": "Reduces inflammation",
+        "dosage": "5mg-60mg daily",
+        "sideEffects": "Increased appetite, mood changes, insomnia"
+    },
+    {
+        "name": "Insulin",
+        "genericName": "Insulin",
+        "category": "Hormone",
+        "description": "Blood sugar control for diabetes",
+        "dosage": "Varies by type and patient needs",
+        "sideEffects": "Low blood sugar, weight gain"
+    },
+    {
+        "name": "Warfarin",
+        "genericName": "Warfarin",
+        "category": "Anticoagulant",
+        "description": "Blood thinner",
+        "dosage": "Varies based on INR monitoring",
+        "sideEffects": "Bleeding, bruising"
+    },
+    {
+        "name": "Losartan",
+        "genericName": "Losartan",
+        "category": "ARB",
+        "description": "Blood pressure medication",
+        "dosage": "25mg-100mg once daily",
+        "sideEffects": "Dizziness, fatigue, back pain"
+    },
+    {
+        "name": "Amlodipine",
+        "genericName": "Amlodipine",
+        "category": "Calcium Channel Blocker",
+        "description": "Blood pressure medication",
+        "dosage": "5mg-10mg once daily",
+        "sideEffects": "Swelling, dizziness, flushing"
+    },
+    {
+        "name": "Gabapentin",
+        "genericName": "Gabapentin",
+        "category": "Anticonvulsant",
+        "description": "Treats nerve pain and seizures",
+        "dosage": "300mg-3600mg daily in divided doses",
+        "sideEffects": "Dizziness, drowsiness, fatigue"
+    }
+]

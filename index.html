@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Checker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💊 Medicine Checker</h1>
+            <p class="subtitle">Verify medicines from our database</p>
+        </header>
+
+        <main>
+            <div class="search-section">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="medicineInput" 
+                        placeholder="Enter medicine name..."
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn">Search</button>
+                </div>
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+
+            <div id="result" class="result"></div>
+
+            <div class="info-section">
+                <h3>How to Use:</h3>
+                <ol>
+                    <li>Type the medicine name in the search box</li>
+                    <li>Click "Search" or press Enter</li>
+                    <li>View the results and medicine details</li>
+                </ol>
+            </div>
+
+            <div class="stats-section">
+                <p>Total medicines in database: <span id="totalMedicines">0</span></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Medicine Checker &copy; 2024 | Data updated regularly</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
