@@ -123,6 +123,11 @@ function updateLanguage() {
     
     // Update title
     document.title = t('title');
+    
+    // Update total medicines count if database is loaded
+    if (medicinesDatabase.length > 0) {
+        totalMedicinesSpan.textContent = medicinesDatabase.length;
+    }
 }
 
 // Load medicines data
